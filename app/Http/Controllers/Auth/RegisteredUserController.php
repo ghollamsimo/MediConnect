@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Specialiter;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -20,7 +21,9 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        $specialiters = Specialiter::all();
+
+        return view('auth.register', ['specialiters'=>$specialiters]);
     }
 
     /**
@@ -34,14 +37,15 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'role' => ['required']
+            'role' => ['required'],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => $request->role
+            'role' => $request->role,
+            'specialiters' => $request->specialiters
         ]);
 
         event(new Registered($user));
@@ -49,5 +53,15 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
+    }
+
+    public function role(){
+        if (\auth()->user()->role === 'admin'){
+            return redirect('/dashboard');
+        }else if (\auth()->user()->role === 'medecin'){
+            return redirect('/medcin');
+        }else{
+            return redirect('/');
+        }
     }
 }

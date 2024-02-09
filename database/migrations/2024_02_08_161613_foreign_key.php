@@ -6,16 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('doctors', function (Blueprint $table) {
-            $table->id();
-            $table->string('status');
-            $table->unsignedBigInteger('specialiter_id');
-            $table->timestamps();
-        });
+        Schema::table('doctors', function (Blueprint $table) {
 
+
+            $table->dropColumn('specialiter_id');
+
+        });
 
     }
 
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('doctors');
+        //
     }
 };

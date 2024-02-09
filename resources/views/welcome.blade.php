@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
     <title>Laravel</title>
 
     <!-- Fonts -->
@@ -26,6 +26,7 @@
         </div>
     @endif
 
+        <x-hero></x-hero>
 </div>
 </body>
 </html>
