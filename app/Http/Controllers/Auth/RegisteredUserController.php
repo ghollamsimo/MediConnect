@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
+use App\Models\Doctor;
+use App\Models\Patient;
 use App\Models\Specialiter;
+use App\Models\Speciality;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -21,9 +25,9 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        $specialiters = Specialiter::all();
+        $specialiters = Speciality::all();
 
-        return view('auth.register', ['specialiters'=>$specialiters]);
+        return view('auth.register', ['specialities' => $specialiters]);
     }
 
     /**
@@ -33,20 +37,40 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'role' => ['required'],
+            'speciality' => [''],
         ]);
-
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => $request->role,
-            'specialiters' => $request->specialiters
         ]);
+
+        if ($validatedData['role'] == 'Medecin'){
+            $medecin = Doctor::create([
+                'user_id' =>  1,
+                'speciality_id' => $validatedData['speciality'],
+            ]);
+        }
+        if ($validatedData['role'] == 'patient'){
+            $patient = Patient::create([
+                'user_id' =>  1,
+            ]);
+        }
+        if ($validatedData['role'] == 'Admin'){
+            $admin = Admin::create([
+                'user_id' =>  1,
+            ]);
+        }
+
+
+
+
 
         event(new Registered($user));
 
@@ -55,12 +79,13 @@ class RegisteredUserController extends Controller
         return redirect(RouteServiceProvider::HOME);
     }
 
-    public function role(){
-        if (\auth()->user()->role === 'admin'){
+    public function role()
+    {
+        if (auth()->user()->role === 'admin') {
             return redirect('/dashboard');
-        }else if (\auth()->user()->role === 'medecin'){
+        } elseif (auth()->user()->role === 'medecin') {
             return redirect('/medcin');
-        }else{
+        } else {
             return redirect('/');
         }
     }

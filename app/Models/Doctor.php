@@ -8,14 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Doctor extends Model
 {
     protected $fillable = [
-        'spicialiter_id',
-        'email',
-        'name',
-        'password'
+        'speciality_id',
+        'user_id',
+
 
     ];
 
     public function specialite(){
-        return $this->hasMany('specialiter');
+        return $this->hasOne('specialiter');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
+}

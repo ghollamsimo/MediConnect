@@ -9,10 +9,11 @@ return new class extends Migration
 
     public function up(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('doctors', function (Blueprint $table) {
             $table->id();
-            $table->string('status');
-            $table->unsignedBigInteger('specialiter_id');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('speciality_id')->constrained('specialities');
             $table->timestamps();
         });
 

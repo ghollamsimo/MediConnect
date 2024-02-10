@@ -8,6 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -24,7 +27,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role'
+        'role',
+        'speciality'
     ];
 
     /**
@@ -46,4 +50,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function specialiters(): BelongsToMany
+    {
+        return $this->belongsToMany(Specialiter::class);
+    }
+    public function doctor()
+    {
+        return $this->HasMany(Doctor::class);
+    }
+    public function patient()
+    {
+        return $this->HasMany(Patient::class);
+    }
+    public function admin()
+    {
+        return $this->HasMany(Admin::class);
+    }
 }

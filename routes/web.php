@@ -23,8 +23,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/medcin' , function (){
-   return view('medcinpage');
-});
+   return view('medecinpage');
+})->name('medcin');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
