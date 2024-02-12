@@ -42,7 +42,7 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'role' => ['required'],
-            'speciality' => [''],
+            'speciality' => ['required_if:role,Médecin', 'exists:specialities,id'],
         ]);
         $user = User::create([
             'name' => $request->name,
@@ -53,22 +53,20 @@ class RegisteredUserController extends Controller
 
         if ($validatedData['role'] == 'Medecin'){
             $medecin = Doctor::create([
-                'user_id' =>  1,
+                'user_id' => $user->id,
                 'speciality_id' => $validatedData['speciality'],
             ]);
         }
         if ($validatedData['role'] == 'patient'){
             $patient = Patient::create([
-                'user_id' =>  1,
+                'user_id' => $user->id,
             ]);
         }
         if ($validatedData['role'] == 'Admin'){
             $admin = Admin::create([
-                'user_id' =>  1,
+                'user_id' => $user->id,
             ]);
         }
-
-
 
 
 
