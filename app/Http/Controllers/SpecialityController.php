@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Doctor;
+use App\Models\Medicament;
+use App\Models\Patient;
 use App\Models\Speciality;
 use Illuminate\Http\Request;
 
@@ -12,13 +15,18 @@ class SpecialityController extends Controller
      */
     public function index()
     {
-        //
+        $specialitiesCount = Speciality::count();
+        $doctorcount = Doctor::count();
+        $medicamentcount = Medicament::count();
+        $patientcount = Patient::count();
+        $medicament = Medicament::all();
+        return view('dashboard', compact('specialitiesCount', 'doctorcount', 'medicamentcount' , 'patientcount' , 'medicament'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
         //
     }

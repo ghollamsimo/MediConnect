@@ -16,11 +16,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/doctor', function (){
+    return view('doctor.dashboard');
+})->name('doctor');
+
+Route::get('/Medicament' , [\App\Http\Controllers\MedicamentController::class , 'index'])->name('medicament');
+
+Route::get('/addMedicament' , [\App\Http\Controllers\MedicamentController::class , 'create'])->name('Medicament');
+
+
+Route::get('/edit_medicament/{id}' , [\App\Http\Controllers\MedicamentController::class , 'update'])->name('edit_medicament');
+
+Route::get('/dashboard' , [\App\Http\Controllers\SpecialityController::class , 'index'])->name('dashboard');
 
 Route::get('/medcin' , function (){
    return view('medecinpage');

@@ -26,8 +26,12 @@ class RegisteredUserController extends Controller
     public function create(): View
     {
         $specialiters = Speciality::all();
-
         return view('auth.register', ['specialities' => $specialiters]);
+    }
+
+    public function showusername(): View {
+        $information = User::all();
+        return view('home' , ['information' => $information]);
     }
 
     /**
@@ -51,21 +55,21 @@ class RegisteredUserController extends Controller
             'role' => $request->role,
         ]);
 
-        if ($validatedData['role'] == 'Medecin'){
+        if ($request->role == 'patient') {
+            $patient = Patient::create(['user_id' => $user->id]); // Changed 'id_user' to 'user_id'
+        } elseif ($request->role == 'Medecin') {
             $medecin = Doctor::create([
-                'user_id' => $user->id,
-                'speciality_id' => $validatedData['speciality'],
+                'user_id' => $user->id, // Changed 'id_user' to 'user_id'
+                'speciality_id' => $validatedData['speciality'] // Changed 'id_spaciality' to 'speciality_id'
             ]);
         }
-        if ($validatedData['role'] == 'patient'){
-            $patient = Patient::create([
-                'user_id' => $user->id,
-            ]);
-        }
-        if ($validatedData['role'] == 'Admin'){
-            $admin = Admin::create([
-                'user_id' => $user->id,
-            ]);
+
+        if ($user->role == 'patient') {
+            Auth::login($user);
+            return redirect()->route('home');
+        } elseif ($user->role == 'Medecin') {
+            Auth::login($user);
+            return redirect()->route('doctor');
         }
 
 
