@@ -56,12 +56,15 @@ class RegisteredUserController extends Controller
         ]);
 
         if ($request->role == 'patient') {
-            $patient = Patient::create(['user_id' => $user->id]); // Changed 'id_user' to 'user_id'
+            $patient = Patient::create(['user_id' => $user->id]);
         } elseif ($request->role == 'Medecin') {
             $medecin = Doctor::create([
-                'user_id' => $user->id, // Changed 'id_user' to 'user_id'
-                'speciality_id' => $validatedData['speciality'] // Changed 'id_spaciality' to 'speciality_id'
+                'user_id' => $user->id,
+                'speciality_id' => $validatedData['speciality']
             ]);
+        }elseif ($request->role == 'Admin'){
+            $admin = Admin::create(['user_id' => $user->id]);
+
         }
 
         if ($user->role == 'patient') {
@@ -70,6 +73,9 @@ class RegisteredUserController extends Controller
         } elseif ($user->role == 'Medecin') {
             Auth::login($user);
             return redirect()->route('doctor');
+        }elseif ($user->role == 'Admin'){
+            Auth::login($user);
+            return redirect()->route('dashboard');
         }
 
 
