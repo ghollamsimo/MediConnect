@@ -16,6 +16,14 @@ class DoctorController extends Controller
         return view("dashboard", compact($doctors));
     }
 
+    public function showalldata(){
+        $doctors = Doctor::join('users', 'doctors.user_id', '=', 'users.id')
+            ->join('specialities', 'doctors.speciality_id', '=', 'specialities.id')
+            ->select('doctors.*', 'users.name as user_name', 'specialities.name as speciality_name')
+            ->get();
+
+        return view('welcome' , compact('doctors'));
+    }
     /**
      * Show the form for creating a new resource.
      */

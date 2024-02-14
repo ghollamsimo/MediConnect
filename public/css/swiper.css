@@ -1,0 +1,12 @@
+.swiper-pagination .swiper-pagination-bullet {
+    background-color: rgb(70, 63, 199) !important;
+    width: 13px;
+    height: 13px;
+}
+
+.gradient-bg:hover {
+    background: linear-gradient(158.44deg,
+    #ebc77a 7.17%,
+    #ca3f8d 52.72%,
+    #5142fc 91.26%) !important;
+}

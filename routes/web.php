@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+
+Route::get('/',[\App\Http\Controllers\DoctorController::class , 'showalldata'])->name('home');
+
 
 Route::get('/doctor', function (){
     return view('doctor.dashboard');
@@ -29,7 +29,15 @@ Route::get('/addMedicament' , [\App\Http\Controllers\MedicamentController::class
 
 Route::get('/edit_medicament/{id}' , [\App\Http\Controllers\MedicamentController::class , 'update'])->name('edit_medicament');
 
+Route::get('/deletemedicament/{id}' , [\App\Http\Controllers\MedicamentController::class , 'destroy'])->name('deletemedicament');
+
+Route::get('/Speciality' , [\App\Http\Controllers\SpecialityController::class , 'create'])->name('Speciality');
+
 Route::get('/dashboard' , [\App\Http\Controllers\SpecialityController::class , 'index'])->name('dashboard');
+
+Route::get('Speciality', function (){
+   return view('pages.speciality');
+});
 
 Route::get('/medcin' , function (){
    return view('medecinpage');

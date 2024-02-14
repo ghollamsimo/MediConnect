@@ -28,7 +28,15 @@ class SpecialityController extends Controller
      */
     public function create(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+        ]);
+
+        $medic = Medicament::create([
+            'name' => $data['name'],
+        ]);
+
+        return redirect()->route('Speciality')->with('success', 'Recits Created  successfully!');
     }
 
     /**
@@ -44,7 +52,8 @@ class SpecialityController extends Controller
      */
     public function show(Speciality $speciality)
     {
-        //
+        $Speciality = Speciality::all();
+        return view('speciality' , ['Speciality' => $Speciality]);
     }
 
     /**

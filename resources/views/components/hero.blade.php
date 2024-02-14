@@ -1,33 +1,33 @@
-<link rel="stylesheet" href="/css/hero.css">
+<div class="hero relative bg-[url('img/common-bg.jpg')] bg-no-repeat bg-cover bg-top pb-16">
+    <div class="container mx-auto pt-40 lg:pt-28 flex flex-col lg:flex-row items-center px-5 gap-5">
+        <div class="absolute inset-0 bg-[length:10px_3px]" style="
+              background-image: linear-gradient(
+                415deg,
+                rgb(255 255 255 / 0.4) 1px,
+                transparent 1px
+              );
+            "></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-black/50 to-[#141420] z-20"></div>
+        <div class="absolute top-32 bg-[url('imgs/hero.png')] left-5 w-24 h-24 bg-cover z-10 blur-md saturate-150">
+        </div>
+        <div class="relative z-30 basis-1/2">
+            <h1 class="text-white font-bold text-[40px] leading-tight">
+                Mediconnect Start BOOK <span class="text-blue-400 font-serif">Appointment</span>
+            </h1>
+            <p class="text-zinc-400 mt-4 text-lg">
+                La mission consiste à concevoir une plateforme de gestion clinique innovante, offrant une expérience fluide
+                tant pour
+                les patients que pour les médecins...
+            </p>
+            <div class="mt-6 flex items-center gap-3 flex-wrap">
+                <a href="#"
+                   class="py-3 px-4 text-white border-2 border-indigo-600 bg-indigo-600 rounded-md inline-block font-bold text-[15px] transition-all hover:bg-indigo-700 hover:border-indigo-700">Book
+                    Appointment Now</a>
 
-<div class="">
-
-    <section class=" relative py-12 overflow-hidden  sm:pb-16 lg:pb-20 xl:pb-24">
-        <div class=" px-4 mx-auto relativea sm:px-6 lg:px-8 max-w-7xl">
-            <div class=" grid items-center grid-cols-1 gap-y-12 lg:grid-cols-2 gap-x-16">
-                <div class="">
-                    <h1 class="text-4xl text-white font-bold font-serif sm:text-5xl lg:text-6xl xl:text-7xl">Mediconnect Start BOOK <span class="text-[#00C6A9]"> APPOINTMENT </span>
-                    </h1>
-                    <p class="mt-4 text-lg font-normal text-gray-400 sm:mt-8">La mission consiste à concevoir une plateforme de gestion clinique innovante, offrant une expérience fluide tant pour les patients que pour les médecins...</p>
-
-                    <div class="relative mt-8 rounded-full sm:mt-12">
-                    </div>
-
-                    <div class="mt-8 sm:mt-12">
-                        <div class="flex items-center mt-3">
-                            <div class="flex">
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="relative">
-
-                    <img src="/img/hero.png" class="rounded">
-                </div>
             </div>
         </div>
-    </section>
+        <div class="image relative z-30">
+            <img src="img/hero.png" alt="..." />
+        </div>
+    </div>
 </div>

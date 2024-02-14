@@ -80,8 +80,11 @@ class MedicamentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Medicament $medicament)
+    public function destroy($id)
     {
+        $medicament = Medicament::findOrFail($id);
+        $medicament->delete();
 
+        return redirect()->route('Medicament')->with('success', 'Medicament Deleted successfully!');
     }
 }
