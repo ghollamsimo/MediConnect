@@ -1,4 +1,4 @@
-<header id="header" class="fixed z-[100] bg-[#141420] w-full top-0 transition-all py-7">
+<header id="header" class=" z-[100] fixed bg-[#141420] w-full top-0 transition-all py-7">
     <div class="container mx-auto flex items-center justify-between px-5">
         <a  href="/" class="logo text-white font-bold font-serif text-3xl">MediConnect</a>
         <button onclick="classList.toggle('group'); document.querySelector('#ul').classList.toggle('max-[992px]:hidden')"
@@ -30,20 +30,17 @@
                     <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-left z-10">
                         @auth
 
-                            <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" type="button">
+                            <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar" class="flex text-sm rounded-full md:me-0" type="button">
                                 <span class="sr-only">Open user menu</span>
-                                <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user photo">
+                                <img class="w-8 h-8 rounded-full" src="img/userprofile.jpg" alt="user photo">
                             </button>
 
                             <!-- Dropdown menu -->
-                            <div id="dropdownAvatar" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                            <div id="dropdownAvatar" class="z-10 hidden divide-y divide-gray-100 rounded-lg shadow w-44 ">
                                 <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
                                     <div>{{ Auth::user()->name }}</div>
                                     <div class="font-medium truncate">{{ Auth::user()->email }}</div>
                                 </div>
-                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUserAvatarButton">
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</a>
-                                </ul>
                                 <div class="py-2">
                                     <form method="post" action="{{route('logout')}}">
                                         @csrf

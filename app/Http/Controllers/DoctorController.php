@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Doctor;
+use App\Models\Speciality;
 use Illuminate\Http\Request;
 
 class DoctorController extends Controller
@@ -17,12 +18,14 @@ class DoctorController extends Controller
     }
 
     public function showalldata(){
+        $specialities = Speciality::all();
+
         $doctors = Doctor::join('users', 'doctors.user_id', '=', 'users.id')
             ->join('specialities', 'doctors.speciality_id', '=', 'specialities.id')
             ->select('doctors.*', 'users.name as user_name', 'specialities.name as speciality_name')
             ->get();
 
-        return view('welcome' , compact('doctors'));
+        return view('welcome' , compact('doctors' , 'specialities'));
     }
     /**
      * Show the form for creating a new resource.

@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[\App\Http\Controllers\DoctorController::class , 'showalldata'])->name('home');
 
+Route::get('/addappointment' , [\App\Http\Controllers\AppointmentController::class , 'create'])->name('creer');
 
 Route::get('/doctor', function (){
     return view('doctor.dashboard');
