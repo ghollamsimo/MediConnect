@@ -34,7 +34,7 @@
                         <div class="swiper-slide w-fit  items-slide rounded-lg bg-white/30 p-[2px] ">
                             <div class="flex items-center gap-3 bg-[#2c2c39] p-5 rounded-lg group">
                                 <div class="slide-content">
-                                    <span class="font-bold block">Medcin: <a href="{{route('doctorprofile')}}">{{$doctor->user_name}}</a></span>
+                                    <span class="font-bold block">Medcin: <a href="/doctorprofile/{{$doctor->user_name}}">{{$doctor->user_name}}</a></span>
                                     <span class="font-bold">Specialiter: <span class="text-blue-400">{{$doctor->speciality_name}}</span></span>
                                 </div>
                             </div>

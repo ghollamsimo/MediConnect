@@ -23,9 +23,7 @@ Route::get('/doctor', function (){
     return view('doctor.dashboard');
 })->name('doctor');
 
-Route::get('/doctorprofile' , function (){
-    return view('pages.profiledoctor');
-})->name('doctorprofile');
+Route::get('/doctorprofile/{id}' , [\App\Http\Controllers\DoctorController::class , 'showprofiledoctor'])->name('doctorprofile');
 
 Route::get('/Medicament' , [\App\Http\Controllers\MedicamentController::class , 'index'])->name('medicament');
 

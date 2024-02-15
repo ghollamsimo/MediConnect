@@ -30,6 +30,18 @@ class DoctorController extends Controller
 
         return view('welcome' , compact('doctors' , 'specialities' , 'patients'));
     }
+
+    public function showprofiledoctor($id)
+    {
+        $doctor = Doctor::with('user', 'specialities')
+            ->join('users', 'doctors.user_id', '=', 'users.id')
+            ->join('specialities', 'doctors.speciality_id', '=', 'specialities.id')
+            ->where('users.id', $id) // Change 'doctors.user_id' to 'users.id'
+            ->first();
+
+
+        return view('pages.profiledoctor' , compact('doctor'));
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -48,35 +60,5 @@ class DoctorController extends Controller
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Doctor $doctor)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Doctor $doctor)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Doctor $doctor)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Doctor $doctor)
-    {
-        //
-    }
 }
