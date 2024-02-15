@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Doctor;
+use App\Models\Patient;
 use App\Models\Speciality;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,9 @@ class DoctorController extends Controller
             ->select('doctors.*', 'users.name as user_name', 'specialities.name as speciality_name')
             ->get();
 
-        return view('welcome' , compact('doctors' , 'specialities'));
+        $patients = Patient::all();
+
+        return view('welcome' , compact('doctors' , 'specialities' , 'patients'));
     }
     /**
      * Show the form for creating a new resource.

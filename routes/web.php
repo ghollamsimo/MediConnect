@@ -15,13 +15,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/',[\App\Http\Controllers\DoctorController::class , 'showalldata'])->name('home');
+Route::get('/',[\App\Http\Controllers\DoctorController::class , 'showalldata'])->name('home')->middleware('auth');
 
 Route::get('/addappointment' , [\App\Http\Controllers\AppointmentController::class , 'create'])->name('creer');
 
 Route::get('/doctor', function (){
     return view('doctor.dashboard');
 })->name('doctor');
+
+Route::get('/doctorprofile' , function (){
+    return view('pages.profiledoctor');
+})->name('doctorprofile');
 
 Route::get('/Medicament' , [\App\Http\Controllers\MedicamentController::class , 'index'])->name('medicament');
 

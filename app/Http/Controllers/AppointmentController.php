@@ -24,23 +24,31 @@ class AppointmentController extends Controller
     public function create(Request $request)
     {
         $data = $request->validate([
-            'name' => ['required'],
-            'email' => ['required'],
-            'user_id' => '',
-            'speciality_id' => ['required'],
-            'message' => ['required']
+            'name' => 'required',
+            'email' => 'required',
+            'user_id' => 'required',
+            'speciality_id' => 'required',
+            'message' => 'required',
+            'doctor' => 'required',
+            'date' => ['required']
         ]);
 
-        $appointment = Appointment::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'user_id' => $data['user_id'],
-            'speciality_id' => $data['speciality_id'],
-            'message' => $data['message']
-        ]);
+       {
 
-        return redirect()->route('creer')->with('success', 'Appointment Created successfully!');
+           Appointment::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'user_id' => $data['user_id'],
+                'speciality_id' => $data['speciality_id'],
+                'message' => $data['message'],
+                'doctor_id' => $data['doctor'],
+                'created_at' => $data['date']
+            ]);
+        }
+
+        return redirect()->route('creer')->with('success', 'Appointments created successfully!');
     }
+
 
 
     /**

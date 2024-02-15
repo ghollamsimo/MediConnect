@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email');
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('speciality_id')->constrained('specialities');
+            $table->foreignId('doctor_id')->constrained('doctors');
             $table->text('message');
             $table->timestamps();
         });

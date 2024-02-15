@@ -47,6 +47,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'role' => ['required'],
             'speciality' => ['required_if:role,Médecin', 'exists:specialities,id'],
+
         ]);
         $user = User::create([
             'name' => $request->name,
