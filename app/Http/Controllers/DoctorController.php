@@ -36,9 +36,7 @@ class DoctorController extends Controller
         $doctor = Doctor::with('user', 'specialities')
             ->join('users', 'doctors.user_id', '=', 'users.id')
             ->join('specialities', 'doctors.speciality_id', '=', 'specialities.id')
-            ->where('users.id', $id) // Change 'doctors.user_id' to 'users.id'
-            ->first();
-
+            ->where('users.id', $id);
 
         return view('pages.profiledoctor' , compact('doctor'));
     }

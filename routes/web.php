@@ -25,6 +25,8 @@ Route::get('/doctor', function (){
 
 Route::get('/doctorprofile/{id}' , [\App\Http\Controllers\DoctorController::class , 'showprofiledoctor'])->name('doctorprofile');
 
+Route::post('/addcomment' , [\App\Http\Controllers\CommentsController::class, 'create'])->name('comment');
+
 Route::get('/Medicament' , [\App\Http\Controllers\MedicamentController::class , 'index'])->name('medicament');
 
 Route::get('/addMedicament' , [\App\Http\Controllers\MedicamentController::class , 'create'])->name('Medicament');
